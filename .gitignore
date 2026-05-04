@@ -1,0 +1,32 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 虚拟环境
+venv/
+.env/
+.venv/
+pyenv/
+
+# 环境变量
+.env
+.env.*
+!.env.example
+
+*.log
+logs/
+
+
+.DS_Store
+Thumbs.db
+
+*.db
+*.sqlite3
+
+tmp/
+temp/
+
+.mypy_cache/
+.ruff_cache/
