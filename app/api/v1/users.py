@@ -8,14 +8,14 @@ router = APIRouter()
 
 
 # 
-@router.get('/get', response_model=ResponseModel, dependencies = [Depends(check_current_role('user:read'))])
+@router.get('/get', response_model=ResponseModel, dependencies=[Depends(check_current_role('user:read'))])
 def get_user(request: Request, name: str | None = None):
     # content-type: application/json
 
     print(request.state.user)
     return ResponseModel.success('Hello uu')
 
-@router.post('/add', response_model=ResponseModel[UserResponse], dependencies = [Depends(check_current_role('user:add'))])
+@router.post('/add', response_model=ResponseModel[UserResponse], dependencies=[Depends(check_current_role('user:add'))])
 def add_user(
     request: Request,
     name: str = Form(...),
