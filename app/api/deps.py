@@ -2,6 +2,7 @@
 from fastapi import Depends, Request, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from app.core.security import decode_token
+from app.db.session import SessionLocal
 
 security = HTTPBearer()
 
@@ -33,9 +34,20 @@ def check_current_role(permission: str):
         if not role:
             raise HTTPException(status_code=403, detail="No permission")
 
-        perms = { 'admin': ['user:read'] }.get(role, [])
+        perms = { 'admin': ['user:read', "user:add"] }.get(role, [])
 
         if permission not in perms:
              raise HTTPException(status_code=403, detail="No permission")
     
     return checker
+
+
+def get_db():
+    db = SessionLocal()
+
+    try:
+        yield db
+    except Exception:
+        db.rollback()
+    finally:
+        db.close()
