@@ -2,7 +2,7 @@ from fastapi import APIRouter, Form, UploadFile, File, Request, Depends
 from app.api.deps import check_current_role, get_db
 from app.schemas.base import ResponseModel
 from app.schemas.users import UserResponse
-from app.services.users import user_add
+# from app.services.users import user_add
 
 router = APIRouter()
 
@@ -24,9 +24,9 @@ def add_user(
 ):
     # content-type: application/x-www-form-urlencoded
 
-    user = user_add(db=db, name=name, age=age)
+    # user = user_add(db=db, name=name, age=age)
     
-    return ResponseModel.success(user)
+    return ResponseModel.success('add')
 
 
 @router.post('/upload', dependencies = [Depends(check_current_role('user:upload'))])

@@ -1,4 +1,5 @@
 
-from .users import Users
+from .users import User
+from .orders import Order
 
-__all__ = ["User"]
+__all__ = ["User", "Order"]

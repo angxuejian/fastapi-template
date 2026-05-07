@@ -1,13 +1,13 @@
 
 from sqlalchemy.orm import Session
-from app.models.users import Users
+# from app.models.users import User
 
-def user_add(db: Session, name: str, age: int):
+# def user_add(db: Session, name: str, age: int):
 
-    user = Users(name=name, age=age)
+#     # user = User(name=name, age=age)
 
-    db.add(user)
-    db.commit()
-    db.refresh(user)
+#     # db.add(user)
+#     # db.commit()
+#     # db.refresh(user)
 
-    return user
+#     return user
