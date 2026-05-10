@@ -15,6 +15,10 @@ class Settings(BaseSettings):
     DB_PASSWORD: str
     DB_NAME: str
 
+    REDIS_HOST: str
+    REDIS_PORT: str
+    REDIS_PASSWORD: str
+
     @property
     def DATABASE_URL(self):
         return (
@@ -25,6 +29,10 @@ class Settings(BaseSettings):
             f"{self.DB_PORT}/"
             f"{self.DB_NAME}"
         )
+    
+    @property
+    def REDIS_URL(self):
+        return(f"redis://:{self.REDIS_PASSWORD}@{self.REDIS_HOST}:{self.REDIS_PORT}/")
 
     model_config = SettingsConfigDict(
         env_file=".env.example",
