@@ -1,4 +1,3 @@
-
 services:
   postgres:
     image: postgres:16
@@ -19,8 +18,8 @@ services:
     image: redis:7
     container_name: redis
 
-    ports:
-      - "${REDIS_PORT}:5432"
+    # ports:
+    #   - "${REDIS_PORT}:5432"
 
     volumes:
       - ./docker/redis.conf:/usr/local/etc/redis/redis.conf
@@ -40,21 +39,11 @@ services:
 
     env_file:
       - .env.example
+      - .env.docker
 
     # environment:
-    #   SECRET_KEY: ${SECRET_KEY}
-    #   ALGORITHM: ${ALGORITHM}
-    #   ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES}
-
-    #   DB_HOST: ${DB_HOST}
-    #   DB_PORT: ${DB_PORT}
-    #   DB_USERNAME: ${DB_USERNAME}
-    #   DB_PASSWORD: ${DB_PASSWORD}
-    #   DB_NAME: ${DB_NAME}
-
-    #   REDIS_HOST: ${REDIS_HOST}
-    #   REDIS_PORT: ${REDIS_PORT}
-    #   REDIS_PASSWORD: ${REDIS_PASSWORD}
+    #   DB_HOST: postgres
+    #   REDIS_HOST: redis
 
     command: >
       uvicorn app.main:app
@@ -80,6 +69,11 @@ services:
 
     env_file:
       - .env.example
+      - .env.docker
+
+    # environment:
+    #   DB_HOST: postgres
+    #   REDIS_HOST: redis
 
     command: >
       celery -A app.core.celery.celery
@@ -97,6 +91,11 @@ services:
 
     env_file:
       - .env.example
+      - .env.docker
+
+    # environment:
+    #   DB_HOST: postgres
+    #   REDIS_HOST: redis
 
     command: >
       celery -A app.core.celery.celery
@@ -116,8 +115,11 @@ services:
     ports:
       - "80:80"
 
+    environment:
+      BACKEND_HOST: app
+
     volumes:
-      - ./docker/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx.conf.template:/etc/nginx/templates/default.conf.template
 
 volumes:
   postgres_data:
