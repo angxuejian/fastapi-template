@@ -3,19 +3,16 @@ from contextlib import asynccontextmanager
 from sqlalchemy import text
 from app.api.v1.router import api_router
 from app.middleware.register import register_middleware
-from app.db.base import Base
 from app.db.session import engine
-import app.models
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    Base.metadata.create_all(bind=engine)
+    # Base.metadata.create_all(bind=engine)
     print("🚀 App startup: DB initialized")
 
     yield
 
-    # 关闭时执行（如果需要的话）
     print("🛑 App shutdown")
 
 app = FastAPI(lifespan=lifespan)

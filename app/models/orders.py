@@ -1,6 +1,6 @@
 from app.db.base import Base;
 from sqlalchemy.orm import Mapped, mapped_column, relationship 
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, String
 from uuid import  UUID
 from .users import User
 from typing import TYPE_CHECKING
@@ -13,5 +13,6 @@ class Order(Base):
     __tablename__ = "orders"
 
     id: Mapped[int] = mapped_column(primary_key=True) 
-    user_id: Mapped[UUID] = mapped_column(ForeignKey('users.id', ondelete="CASCADE")) 
+    user_id: Mapped[UUID] = mapped_column(ForeignKey('users.id', ondelete="CASCADE"))
+    order_name: Mapped[str] = mapped_column(String(60))
     user_rel: Mapped["User"] = relationship(back_populates="orders_rel")
