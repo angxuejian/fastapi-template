@@ -5,6 +5,7 @@ from app.api.v1.router import api_router
 from app.middleware.register import register_middleware
 from app.db.session import engine
 from app.db.redis import create_redis
+from app.tasks.email import send_email
 
 
 @asynccontextmanager
@@ -51,3 +52,10 @@ async def redis_set(request: Request):
     redis = request.app.state.redis
     name = await redis.get('name')
     return { "msg": name }
+
+@app.get('/send')
+async def send():
+
+    send_email.delay("2523@qq.com")
+
+    return {"msg": "email send success"}
