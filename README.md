@@ -4,6 +4,7 @@ A personal FastAPI template project for building structured and scalable backend
 
 <!-- 1、source pyenv/bin/activate | deactivate -->
 <!-- 2、uvicorn app.main:app --reload -->
+<!-- uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload -->
 <!-- 3、pip freeze > requirements.txt -->
 <!-- 4、python3 -c "import secrets; print(secrets.token_urlsafe(32))" -->
 <!-- docker compose -f dev.yml --env-file .env.example up -d --build -->

@@ -2,12 +2,12 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# 系统依赖
-RUN apt-get update && apt-get install -y \
-    gcc \
-    curl \
-    netcat-openbsd \
-    && rm -rf /var/lib/apt/lists/*
+# # 系统依赖
+# RUN apt-get update && apt-get install -y \
+#     gcc \
+#     curl \
+#     netcat-openbsd \
+#     && rm -rf /var/lib/apt/lists/*
 
 # 安装依赖
 COPY requirements.txt .
