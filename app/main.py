@@ -29,33 +29,33 @@ def read_root():
     return {"msg": "Hello FastAPI"}
 
 
-@app.get("/health/db")
-async def check_db():
-    try:
-        with engine.connect() as conn:
-            result = conn.execute(text("SELECT 1"))
-            result.scalar()
-        return {"status": "connected", "message": "数据库连接正常 ✅"}
-    except Exception as e:
-        return {"status": "error", "message": str(e)}
+# @app.get("/health/db")
+# async def check_db():
+#     try:
+#         with engine.connect() as conn:
+#             result = conn.execute(text("SELECT 1"))
+#             result.scalar()
+#         return {"status": "connected", "message": "数据库连接正常 ✅"}
+#     except Exception as e:
+#         return {"status": "error", "message": str(e)}
     
-@app.get('/redis-set')
-async def redis_set(request: Request):
+# @app.get('/redis-set')
+# async def redis_set(request: Request):
 
-    redis = request.app.state.redis
-    await redis.set("name", "xuejy", ex=60)
-    return { "msg": "success" }
+#     redis = request.app.state.redis
+#     await redis.set("name", "xuejy", ex=60)
+#     return { "msg": "success" }
 
-@app.get('/redis-get')
-async def redis_set(request: Request):
+# @app.get('/redis-get')
+# async def redis_set(request: Request):
 
-    redis = request.app.state.redis
-    name = await redis.get('name')
-    return { "msg": name }
+#     redis = request.app.state.redis
+#     name = await redis.get('name')
+#     return { "msg": name }
 
-@app.get('/send')
-async def send():
+# @app.get('/send')
+# async def send():
 
-    send_email.delay("2523@qq.com")
+#     send_email.delay("2523@qq.com")
 
-    return {"msg": "email send success"}
+#     return {"msg": "email send success"}

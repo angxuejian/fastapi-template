@@ -35,8 +35,8 @@ class Settings(BaseSettings):
         return(f"redis://:{self.REDIS_PASSWORD}@{self.REDIS_HOST}:{self.REDIS_PORT}/")
 
     model_config = SettingsConfigDict(
-        env_file=".env.example",
-        env_file_encoding="utf-8"
+        env_file=".env",
+        extra="ignore"
     )
 
 

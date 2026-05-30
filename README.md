@@ -2,6 +2,37 @@
 
 A personal FastAPI template project for building structured and scalable backend services.
 
+
+## Quickstart
+
+```bash
+# start
+docker compose -f dev.yml up -d
+
+# http://127.0.0.1:80
+# http://127.0.0.1:80/docs
+# http://127.0.0.1:5555
+
+
+# stop
+docker compose -f dev.yml down
+```
+
+## Manual step-by-step setup
+```bash
+# 1. 编写数据模型
+# 2. 启动数据库并 alembic连接数据库
+# 3. init version
+alembic revision --autogenerate -m "init rbac"
+
+# 4. upgrade head and create admin user / [username: admin, password: admin123]
+alembic upgrade head
+
+# 5. 服务启动
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+<!-- python -m venv pyenv -->
 <!-- 1、source pyenv/bin/activate | deactivate -->
 <!-- 2、uvicorn app.main:app --reload -->
 <!-- uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload -->

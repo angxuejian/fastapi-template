@@ -17,3 +17,16 @@ def login(username: str = Form(...), password: str = Form(...)):
         "access_token": token,
         "token_type": "bearer"
     }
+
+# @router.post("/logout")
+
+
+
+@router.post("/register")
+def register(username: str = Form(...), password: str = Form(...)):
+    
+    print(f"register: {username}, {password}")
+
+    return {
+        "message": "registration successful"
+    }
