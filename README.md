@@ -7,6 +7,7 @@ A personal FastAPI template project for building structured and scalable backend
 
 ```bash
 # start
+cp .env.example .env
 docker compose -f dev.yml up -d
 
 # http://127.0.0.1:80
